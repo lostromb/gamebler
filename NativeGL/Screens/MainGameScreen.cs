@@ -24,6 +24,7 @@ namespace NativeGL.Screens
         private List<RouletteSlot> _rouletteSlots = new List<RouletteSlot>();
         private RouletteSlot _selectedSlot = null;
         private Queue<RouletteSlotType> _categoryHistory = new Queue<RouletteSlotType>();
+        private HashSet<RouletteSlotType> _allPlayedCategories = new HashSet<RouletteSlotType>();
 
         private float _wheelVelocity = 0;
         private float _wheelRotation = 0;
@@ -138,6 +139,13 @@ namespace NativeGL.Screens
                             outcomeOk = false;
                         }
 
+                        // Disallow more than one round of Betrayal
+                        if (predictedOutcome == RouletteSlotType.PrisonerDilemma &&
+                            _allPlayedCategories.Contains(predictedOutcome))
+                        {
+                            outcomeOk = false;
+                        }
+
                         // Disallow feelin' sad when any player has zero points
                         if (predictedOutcome == RouletteSlotType.FeelinSad &&
                             GameState.Players.Any((s) => s.Score <= 0))
@@ -145,13 +153,13 @@ namespace NativeGL.Screens
                             outcomeOk = false;
                         }
 
-                        // TODO Disallow A.I. arena and prisoners dilemma when players have low score totals
-                        if (predictedOutcome == RouletteSlotType.FeelinSad &&
+                        // Disallow A.I. arena and prisoners dilemma when players have low score totals
+                        if ((predictedOutcome == RouletteSlotType.AIArena || predictedOutcome == RouletteSlotType.PrisonerDilemma) &&
                             GameState.Players.Any((s) => s.Score < 150))
                         {
                             outcomeOk = false;
                         }
-                    } while (outcomeOk && outcomeRetries++ < 50);
+                    } while (!outcomeOk && outcomeRetries++ < 50);
                     _wheelVelocity = hypVelocity;
                     Resources.AudioSubsystem.PlayMusic("Randomizer");
                     _wheelLocked = false;
@@ -165,24 +173,15 @@ namespace NativeGL.Screens
                         case RouletteSlotType.Descrambler:
                             EnqueueScreen(new DescramblerScreen());
                             break;
-                        case RouletteSlotType.GospelPrinciples:
-                            EnqueueScreen(new GospelPrinciplesScreen());
-                            break;
-                        case RouletteSlotType.MusicTest:
+                        case RouletteSlotType.SoundTest:
                             EnqueueScreen(new SoundTestScreen());
                             break;
-                        case RouletteSlotType.PictureQuiz:
-                            EnqueueScreen(new PictureQuizScreen());
-                            break;
-                        case RouletteSlotType.ArticleOfFaith:
-                            EnqueueScreen(new ArticleOfFaithScreen());
-                            break;
-                        case RouletteSlotType.Scribbler:
-                            EnqueueScreen(new ScribblerScreen());
-                            break;
-                        case RouletteSlotType.Storytime:
-                            EnqueueScreen(new StorytimeScreen());
-                            break;
+                        //case RouletteSlotType.PictureQuiz:
+                        //    EnqueueScreen(new PictureQuizScreen());
+                        //    break;
+                        //case RouletteSlotType.Scribbler:
+                        //    EnqueueScreen(new ScribblerScreen());
+                        //    break;
                         case RouletteSlotType.WordDescrambler:
                             EnqueueScreen(new WordDescramblerScreen());
                             break;
@@ -476,42 +475,42 @@ namespace NativeGL.Screens
                 {
                     Weight = 3.0f,
                     Color = FromColor(Color.FromArgb(32, 19, 174)),
-                    Label = "Gospel Principles",
+                    Label = "Drawbage",
                     RenderedLabel = new QFontDrawing(),
-                    Type = RouletteSlotType.GospelPrinciples
+                    Type = RouletteSlotType.Drawbage
                 });
             }
-            //for (int c = 0; c < 3; c++)
-            //{
-            //    returnVal.Add(new RouletteSlot()
-            //    {
-            //        Weight = 3.0f,
-            //        Color = FromColor(Color.FromArgb(52, 230, 45)),
-            //        Label = "Articles of Faith",
-            //        RenderedLabel = new QFontDrawing(),
-            //        Type = RouletteSlotType.ArticleOfFaith
-            //    });
-            //}
-            //for (int c = 0; c < 2; c++)
-            //{
-            //    returnVal.Add(new RouletteSlot()
-            //    {
-            //        Weight = 2.0f,
-            //        Color = FromColor(Color.FromArgb(217, 21, 39)),
-            //        Label = "Scribbler",
-            //        RenderedLabel = new QFontDrawing(),
-            //        Type = RouletteSlotType.Scribbler
-            //    });
-            //}
+            for (int c = 0; c < 3; c++)
+            {
+                returnVal.Add(new RouletteSlot()
+                {
+                    Weight = 3.0f,
+                    Color = FromColor(Color.FromArgb(52, 230, 45)),
+                    Label = "Quizzler",
+                    RenderedLabel = new QFontDrawing(),
+                    Type = RouletteSlotType.Quizzler
+                });
+            }
+            for (int c = 0; c < 2; c++)
+            {
+                returnVal.Add(new RouletteSlot()
+                {
+                    Weight = 2.0f,
+                    Color = FromColor(Color.FromArgb(217, 21, 39)),
+                    Label = "The Arena",
+                    RenderedLabel = new QFontDrawing(),
+                    Type = RouletteSlotType.AIArena
+                });
+            }
             for (int c = 0; c < 2; c++)
             {
                 returnVal.Add(new RouletteSlot()
                 {
                     Weight = 3.0f,
                     Color = FromColor(Color.FromArgb(107, 31, 151)),
-                    Label = "Picture Quiz",
+                    Label = "Sound Test",
                     RenderedLabel = new QFontDrawing(),
-                    Type = RouletteSlotType.PictureQuiz
+                    Type = RouletteSlotType.SoundTest
                 });
             }
             for (int c = 0; c < 2; c++)
@@ -531,22 +530,22 @@ namespace NativeGL.Screens
                 {
                     Weight = 5.0f,
                     Color = FromColor(Color.FromArgb(239, 194, 0)),
-                    Label = "Music Test",
+                    Label = "Betrayal",
                     RenderedLabel = new QFontDrawing(),
-                    Type = RouletteSlotType.MusicTest
+                    Type = RouletteSlotType.PrisonerDilemma
                 });
             }
-            for (int c = 0; c < 1; c++)
-            {
-                returnVal.Add(new RouletteSlot()
-                {
-                    Weight = 3.0f,
-                    Color = FromColor(Color.FromArgb(217, 21, 39)),
-                    Label = "Shoutout",
-                    RenderedLabel = new QFontDrawing(),
-                    Type = RouletteSlotType.Shoutout
-                });
-            }
+            //for (int c = 0; c < 1; c++)
+            //{
+            //    returnVal.Add(new RouletteSlot()
+            //    {
+            //        Weight = 3.0f,
+            //        Color = FromColor(Color.FromArgb(217, 21, 39)),
+            //        Label = "Shoutout",
+            //        RenderedLabel = new QFontDrawing(),
+            //        Type = RouletteSlotType.Shoutout
+            //    });
+            //}
             //for (int c = 0; c < 2; c++)
             //{
             //    returnVal.Add(new RouletteSlot()
@@ -643,6 +642,11 @@ namespace NativeGL.Screens
             {
                 _wheelVelocity = 0;
                 _wheelLocked = true;
+                if (!_allPlayedCategories.Contains(_selectedSlot.Type))
+                {
+                    _allPlayedCategories.Add(_selectedSlot.Type);
+                }
+
                 _categoryHistory.Enqueue(_selectedSlot.Type);
                 if (_categoryHistory.Count > 2)
                 {

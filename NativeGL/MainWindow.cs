@@ -68,14 +68,11 @@ namespace NativeGL
 
             _gameState = new GlobalGameState();
 
-            _gameState.GospelPrincipleQuestions = JsonConvert.DeserializeObject<List<PrincipleQuestion>>(File.ReadAllText(@".\Resources\Questions\GospelPrinciples.json"));
             _gameState.PictureQuizQuestions = JsonConvert.DeserializeObject<List<PictureQuizQuestion>>(File.ReadAllText(@".\Resources\Questions\PictureQuiz.json"));
             _gameState.MusicQuizSongs = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(@".\Resources\Questions\Songs.json"));
             _gameState.DescramblerImages = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(@".\Resources\Questions\Descrambler.json"));
-            _gameState.ArticlesOfFaith = JsonConvert.DeserializeObject<List<ArticleOfFaith>>(File.ReadAllText(@".\Resources\Questions\ArticlesOfFaith.json"));
             _gameState.WordDescramberWords = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(@".\Resources\Questions\WordDescrambler.json"));
             _gameState.Shoutouts = JsonConvert.DeserializeObject<List<List<string>>>(File.ReadAllText(@".\Resources\Questions\Shoutouts.json"));
-
 
             _staticResources.AudioSubsystem = new AudioSystem(_logger.Clone("AudioSystem"));
 

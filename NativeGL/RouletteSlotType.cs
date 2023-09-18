@@ -9,16 +9,14 @@ namespace NativeGL
     public enum RouletteSlotType
     {
         Unknown,
-        GospelPrinciples,
-        ArticleOfFaith,
-        PictureQuiz,
-        MusicTest,
+        Quizzler,
+        Drawbage,
+        SoundTest,
         Descrambler,
-        Scribbler,
-        Storytime,
+        AIArena,
+        PrisonerDilemma,
         FeelinSad,
         FeelinGroovy,
         WordDescrambler,
-        Shoutout
     }
 }
