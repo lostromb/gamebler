@@ -1,0 +1,15 @@
+[
+{ "Difficulty": 1, "ImageName": "3-8", "QuestionText": "Who is this modern-day prophet?" },
+{ "Difficulty": 1, "ImageName": "monson", "QuestionText": "Who is this modern-day prophet?" },
+{ "Difficulty": 1, "ImageName": "sltemple", "QuestionText": "What is this?" },
+{ "Difficulty": 2, "ImageName": "3-50", "QuestionText": "Who is this famous missionary to the Lamanites?" },
+{ "Difficulty": 2, "ImageName": "tencommandments", "QuestionText": "What is written on these stone tablets?" },
+{ "Difficulty": 2, "ImageName": "tenvirgins", "QuestionText": "In the parable of the ten virgins, what did the foolish ones forget to do?" },
+{ "Difficulty": 2, "ImageName": "firstvision_art", "QuestionText": "Tell me why this event was important" },
+{ "Difficulty": 4, "ImageName": "3-72", "QuestionText": "Jesus descends from the sky. Where did this take place?" },
+{ "Difficulty": 4, "ImageName": "benjamin", "QuestionText": "Who is speaking from the top of this tower?" },
+{ "Difficulty": 4, "ImageName": "daniel", "QuestionText": "What is Daniel doing here, and why?" },
+{ "Difficulty": 8, "ImageName": "3-47", "QuestionText": "Name 2 prophets in this picture" },
+{ "Difficulty": 8, "ImageName": "moroni", "QuestionText": "Moroni buries the Gold Plates. Why?" },
+{ "Difficulty": 8, "ImageName": "holland", "QuestionText": "Who is Brother Stromberg's favorite apostle?" }
+]

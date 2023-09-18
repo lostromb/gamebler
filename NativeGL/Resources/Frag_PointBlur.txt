@@ -1,0 +1,25 @@
+#version 120
+
+uniform sampler2D textureImage;
+uniform float dist; // should be about 0.25
+
+void main( void )
+{
+	vec2 centerCoord = gl_TexCoord[0].st;
+	vec3 accum = vec3(0.0);
+
+	int numSamples = 16;
+	float a = 0;
+	float r = 0;
+	float factor = 1.0f;
+
+	for (int sample = 0; sample < numSamples; sample++)
+	{
+		r += 0.005 * dist;
+		a += 0.964f;
+		vec2 sampleLoc = vec2(r * sin(a), r * cos(a));
+		accum += texture2D(textureImage, centerCoord + sampleLoc).rgb * factor;
+		factor *= 0.8f;
+	}
+	gl_FragColor = vec4(accum / numSamples, 1.0);
+}

@@ -1,0 +1,10 @@
+uniform mat4 projectionMatrix;
+uniform mat4 modelViewMatrix;
+varying vec4 frontColor;
+
+void main( void )
+{
+	gl_Position = projectionMatrix * modelViewMatrix * gl_Vertex;
+	gl_TexCoord[0] = gl_MultiTexCoord0;
+	frontColor = gl_Color;
+}

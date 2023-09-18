@@ -1,0 +1,7 @@
+uniform sampler2D textureImage;
+varying vec4 frontColor;
+
+void main( void )
+{
+	gl_FragColor = texture2D( textureImage, gl_TexCoord[0].st ) * frontColor;
+}

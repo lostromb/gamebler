@@ -1,0 +1,21 @@
+#version 120
+
+uniform sampler2D textureImage;
+uniform sampler2D distortionMap;
+uniform float distortion; // from 0.0 to about 0.75 works well
+uniform float time; // not sure the timescale to use here. Seconds I guess?
+
+void main( void )
+{
+    float wobbleX = (0.4 * sin(time * 1.32)) +
+                    (0.3 * cos(time * 0.76)) +
+                    (0.2 * sin(time * 1.9)) +
+                    (0.2 * cos(time * 2.76));
+    float wobbleY = (0.4 * cos(time * 1.12)) +
+                    (0.3 * sin(time * 1.06)) +
+                    (0.2 * cos(time * 1.43)) +
+                    (0.2 * sin(time * 3.23));
+    vec2 distortCenter = gl_TexCoord[0].st + vec2(wobbleX, wobbleY);
+	vec2 distort = (texture2D(distortionMap, distortCenter).rg - vec2(0.5, 0.5)) * (distortion * distortion);
+	gl_FragColor = texture2D(textureImage, gl_TexCoord[0].st + distort);
+}

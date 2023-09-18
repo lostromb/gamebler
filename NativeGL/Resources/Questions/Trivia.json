@@ -1,0 +1,42 @@
+[
+{ "Category": "Minecraft", "QuestionText": "In Minecraft, what mob do Creepers run away from?", "Answer": "Cat", "Incorrect": [ "Hoglin", "Horse", "Warden" ] },
+{ "Category": "Fortnite", "QuestionText": "Which character in Fortnite is shaped like a banana?", "Answer": "Peely", "Incorrect": [ "Willy", "Skinny", "Slippy" ] },
+{ "Category": "Soccer", "QuestionText": "Which soccer team won the 2022 World Cup in Qatar?", "Answer": "Argentina", "Incorrect": [ "France", "Brazil", "Croatia" ] },
+{ "Category": "Cartoons", "QuestionText": "In the animated TV series Ben 10: Omniverse, what is the name of the alien plumber who is the partner of the protagonist Ben Tennyson?", "Answer": "Rook", "Incorrect": [ "Skurd", "Zed", "Max" ] },
+{ "Category": "Star Wars", "QuestionText": "In the Star Wars universe, Cloud City is located above which planet?", "Answer": "Bespin", "Incorrect": [ "Dantooine", "Degobah", "Alderaan" ] },
+{ "Category": "Football", "QuestionText": "Which city do the Chargers play football for?", "Answer": "Los Angeles", "Incorrect": [ "St. Louis", "Kansas City", "Denver" ] },
+{ "Category": "Hockey", "QuestionText": "Wayne Gretzky first played league ice hockey for which team?", "Answer": "Edmonton Oilers", "Incorrect": [ "Ottowa Senators", "Montreal Canadiens", "Winnipeg Jets" ] },
+{ "Category": "Disney", "QuestionText": "In the movie Finding Nemo, what species of animal is Bruce?", "Answer": "Great White Shark", "Incorrect": [ "Sea Turtle", "Stingray", "Octopus" ] },
+{ "Category": "Cartoons", "QuestionText": "In DuckTales, which of these is not a nephew of Scrooge McDuck?", "Answer": "Stewie", "Incorrect": [ "Huey", "Dewey", "Louie" ] },
+{ "Category": "Marvel", "QuestionText": "Which of these is NOT a Spider-Man villan?", "Answer": "The Juggernaut", "Incorrect": [ "Green Goblin", "Kingpin", "Dr. Octopus" ] },
+{ "Category": "Marvel", "QuestionText": "In the movie Avengers: Secret Wars, who sent Earth's mightiest heroes and villains to Battleworld?", "Answer": "The Beyonder", "Incorrect": [ "Thanos", "Dormammu", "Galactus" ] },
+{ "Category": "Sports", "QuestionText": "Who pitched Major League Baseball's 24th ever 'perfect game' on June 28 2023?", "Answer": "Domingo Germán", "Incorrect": [ "Félix Hernández", "Matt Cain", "Armando Galarraga" ] },
+{ "Category": "History", "QuestionText": "In which American city was there a famous 'tea party' in 1773?", "Answer": "Boston", "Incorrect": [ "Philadelphia", "New York", "Baltimore" ] },
+{ "Category": "Nintendo", "QuestionText": "Who is the final villain in Paper Mario: The Origami King?", "Answer": "Olly", "Incorrect": [ "Bowser Jr.", "Geno", "Smithy" ] },
+{ "Category": "Chemistry", "QuestionText": "Which element is represented by the symbol 'Pb' on the Periodic Table?", "Answer": "Lead", "Incorrect": [ "Potassium", "Gold", "Plutonium" ] },
+{ "Category": "Nature", "QuestionText": "What colour is a giraffe’s tongue?", "Answer": "Blue", "Incorrect": [ "Pink", "Orange", "Brown" ] },
+{ "Category": "Harry Potter", "QuestionText": "In the first Harry Potter novel, which vault in Gringott's Bank contained the Sorcerer's Stone?", "Answer": "713", "Incorrect": [ "492", "12", "687" ] },
+{ "Category": "Geography", "QuestionText": "What is the second largest state in the U.S.A., after Alaska?", "Answer": "Texas", "Incorrect": [ "Montana", "California", "Minnesota" ] },
+{ "Category": "Pokémon", "QuestionText": "In Pokémon Scarlet and Violet, what is Koraidon's Type?", "Answer": "Dragon + Fighting", "Incorrect": [ "Dragon + Dark", "Dragon + Ground", "Dragon + Fire" ] },
+{ "Category": "Pokémon", "QuestionText": "In the Pokémon series, what will cause Galarian Farfetch'd to evolve into Sirfetch'd?", "Answer": "Landing 3 crits in one battle", "Incorrect": [ "Losing at least 49 HP in one attack without fainting", "Player gives it a Leek to hold", "Defeating 100 total opponents" ] },
+{ "Category": "Book of Mormon", "QuestionText": "In the Book of Mormon, which Nephite commander assassinated the king of the Lamanites with a javelin in the middle of the night?", "Answer": "Teancum", "Incorrect": [ "Moroni", "Helaman", "Amalickiah" ] },
+{ "Category": "The Bible", "QuestionText": "At the trial of Jesus, whom did Pilate release from prison?", "Answer": "Barabbas", "Incorrect": [ "John the Baptist", "Saul", "Joseph of Arimathea" ] },
+{ "Category": "Nintendo", "QuestionText": "When Mew pops out of a Pokéball in Super Smash Brothers: Ultimate, what does it do?", "Answer": "Nothing", "Incorrect": [ "Boosts its owner's stats", "Drops items", "Puts everyone to sleep" ] },
+{ "Category": "Minecraft", "QuestionText": "In Minecraft, if a villager gets struck by lightning, what do they turn into?", "Answer": "Witch", "Incorrect": [ "Husk", "Skeleton", "Pillager" ] },
+{ "Category": "Minecraft", "QuestionText": "In Minecraft, what is the name of the Ender Dragon?", "Answer": "Jean", "Incorrect": [ "Blaze", "Saphira", "Jade" ] },
+{ "Category": "Nintendo", "QuestionText": "What boss do you fight in the prologue of Metroid Prime?", "Answer": "Parasite Queen", "Incorrect": [ "Flaahgra", "Omega Pirate", "Meta Ridley" ] },
+{ "Category": "Fornite", "QuestionText": "In Fortnite, which consumable spawns a random prop from above to crush foes?", "Answer": "Junk Rift", "Incorrect": [ "Prop Spawner", "Port-a-Fort", "Rift-2-Go" ] },
+{ "Category": "Sonic the Hedgehog", "QuestionText": "What is Sonic the Hedgehog's favorite food?", "Answer": "Chili Dogs", "Incorrect": [ "Pizza", "Mint Candy", "Spicy Chicken" ] },
+{ "Category": "Star Wars", "QuestionText": "This Jedi survived Order 66 and lived undercover as a shipbreaker on planet Bracca for several years", "Answer": "Cal Kestis", "Incorrect": [ "Ahsoka Tano", "Obi-Wan Kenobi", "Kyle Katarn" ] },
+{ "Category": "Star Wars", "QuestionText": "\"Have you ever heard the tragedy of ____?\"", "Answer": "Darth Plagueis the Wise", "Incorrect": [ "Darth Bane the Warrior", "Darth Sidious the Emperor", "Darth Vader the Hateful" ] },
+{ "Category": "Spelling", "QuestionText": "Which spelling of this word is correct?", "Answer": "Absent", "Incorrect": [ "Abscent", "Abcent", "Abbsent" ] },
+{ "Category": "Math", "QuestionText": "What is the square root of 36?", "Answer": "6", "Incorrect": [ "18", "3", "30" ] },
+
+{ "Category": "Geography", "QuestionText": "Which river forms part of the border between the U.S.A. and Mexico?", "Answer": "The Rio Grande", "Incorrect": [ "The Mississippi", "The San Joaquin", "The Colorado" ] },
+]
+
+
+{ "Category": "Cereal", "QuestionText": "What cereal was originally called 'Elijah’s Manna'?", "Answer": "Shredded Wheat", "Incorrect": [ "Crispix", "Cheerios", "Corn Flakes" ] },
+
+
+{ "Category": "CATEGORY", "QuestionText": "qUESTION", "Answer": "ANSWER", "Incorrect": [ "BAD", "BAD", "BAD" ] },
