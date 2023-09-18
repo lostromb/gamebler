@@ -145,7 +145,12 @@ namespace NativeGL.Screens
                             outcomeOk = false;
                         }
 
-
+                        // TODO Disallow A.I. arena and prisoners dilemma when players have low score totals
+                        if (predictedOutcome == RouletteSlotType.FeelinSad &&
+                            GameState.Players.Any((s) => s.Score < 150))
+                        {
+                            outcomeOk = false;
+                        }
                     } while (outcomeOk && outcomeRetries++ < 50);
                     _wheelVelocity = hypVelocity;
                     Resources.AudioSubsystem.PlayMusic("Randomizer");
