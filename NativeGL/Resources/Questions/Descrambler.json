@@ -1,3 +1,5 @@
 [
-	{ "Hint": "Who's That Pokémon?", "ImageName": "geodude" },
+	{ "Hint": "Who's That Pokémon?", "ImageName": "growlithe", "Answer": "It's Growlithe!" },
+	{ "Hint": "Hint: Logo", "ImageName": "mrbeast", "Answer": "The MrBeast Logo" },
+	{ "Hint": "Name this Roblox game", "ImageName": "squid game", "Answer": "Squid Game" },
 ]

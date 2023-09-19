@@ -1,23 +1,6 @@
-﻿using NativeGL;
-using NativeGL.Screens;
-using OpenTK;
-using OpenTK.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using OpenTK.Graphics.OpenGL;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using QuickFont;
-using QuickFont.Configuration;
-using System.Drawing.Text;
-using NativeGL.Structures;
-using OpenTK.Input;
+﻿using Durandal.Common.Logger;
+using Durandal.Common.Utils.NativePlatform;
+using NativeGL.Utils;
 
 namespace NativeGL
 {
@@ -25,6 +8,9 @@ namespace NativeGL
     {
         public static void Main(string[] args)
         {
+            NativePlatformUtils.SetGlobalResolver(new NativeLibraryLoader());
+            NativePlatformUtils.PrepareNativeLibrary("opus", DebugLogger.Default);
+            NativePlatformUtils.PrepareNativeLibrary("speexdsp", DebugLogger.Default);
             new MainWindow().Run();
         }
     }

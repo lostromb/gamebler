@@ -58,7 +58,6 @@ namespace NativeGL
             this.TargetRenderFrequency = 60;
             this.TargetUpdateFrequency = 60;
             _logger = new ConsoleLogger();
-            NativePlatformUtils.SetGlobalResolver(new NativeLibraryResolverImpl());
 
             _frameTimer = new HighPrecisionTimer();
             _frameTimer.Start();
@@ -69,7 +68,7 @@ namespace NativeGL
             _gameState = new GlobalGameState();
 
             _gameState.PictureQuizQuestions = JsonConvert.DeserializeObject<List<PictureQuizQuestion>>(File.ReadAllText(@".\Resources\Questions\PictureQuiz.json"));
-            _gameState.MusicQuizSongs = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(@".\Resources\Questions\Songs.json"));
+            _gameState.MusicQuizSongs = JsonConvert.DeserializeObject<List<SoundTestPrompt>>(File.ReadAllText(@".\Resources\Questions\Songs.json"));
             _gameState.DescramblerImages = JsonConvert.DeserializeObject<List<DescramblerPrompt>>(File.ReadAllText(@".\Resources\Questions\Descrambler.json"));
             _gameState.WordDescramberWords = JsonConvert.DeserializeObject<List<WordDescramblerPrompt>>(File.ReadAllText(@".\Resources\Questions\WordDescrambler.json"));
            
@@ -120,7 +119,7 @@ namespace NativeGL
             QFontBuilderConfiguration fontBuilderConfig = new QFontBuilderConfiguration(true)
             {
                 TextGenerationRenderHint = TextGenerationRenderHint.AntiAlias | TextGenerationRenderHint.AntiAliasGridFit,
-                Characters = CharacterSet.BasicSet,
+                Characters = CharacterSet.BasicSet | CharacterSet.ExtendedLatin,
                 ShadowConfig = new QFontShadowConfiguration()
                 {
                     Type = ShadowType.Expanded,

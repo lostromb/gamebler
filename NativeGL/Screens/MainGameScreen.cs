@@ -41,6 +41,8 @@ namespace NativeGL.Screens
         private QFontDrawing _playerAreaText;
         private List<GLButton> _playerButtons;
 
+        private bool _timesAlmostUp = false;
+
         protected override void InitializeInternal()
         {
             _rouletteSlots = BuildWheel();
@@ -161,7 +163,11 @@ namespace NativeGL.Screens
                         }
                     } while (!outcomeOk && outcomeRetries++ < 50);
                     _wheelVelocity = hypVelocity;
-                    Resources.AudioSubsystem.PlayMusic("Randomizer");
+                    if (!_timesAlmostUp)
+                    {
+                        Resources.AudioSubsystem.PlayMusic("Randomizer");
+                    }
+
                     _wheelLocked = false;
                 }
 
@@ -204,6 +210,12 @@ namespace NativeGL.Screens
                         _allPlayedCategories.Add(_selectedSlot.Type);
                     }
                 }
+            }
+
+            if (args.Key == OpenTK.Input.Key.End)
+            {
+                _timesAlmostUp = true;
+                Resources.AudioSubsystem.PlayMusic("pizza");
             }
         }
 
@@ -345,7 +357,7 @@ namespace NativeGL.Screens
             float avatarAreaWidth = 800;
             float avSize = Math.Min(200, (InternalResolutionY / (float)GameState.Players.Count) - avatarPadding);
             float totalPlayerAreaHeight = (GameState.Players.Count * avSize) + ((GameState.Players.Count - 1) * avatarPadding);
-            float playerOffsetY = ((InternalResolutionY - totalPlayerAreaHeight) / 2) + avSize + avatarPadding;
+            float playerOffsetY = InternalResolutionY - ((InternalResolutionY - totalPlayerAreaHeight) / 2) - avSize;
 
             _playerAreaText.DrawingPrimitives.Clear();
             _playerAreaText.ProjectionMatrix = _projectionMatrix;
@@ -608,17 +620,9 @@ namespace NativeGL.Screens
             {
                 Weight = 3.0f,
                 Color = FromColor(Color.FromArgb(32, 19, 174)),
-                Label = "Words",
+                Label = "Debug",
                 RenderedLabel = new QFontDrawing(),
-                Type = RouletteSlotType.WordDescrambler
-            });
-            returnVal.Add(new RouletteSlot()
-            {
-                Weight = 3.0f,
-                Color = FromColor(Color.FromArgb(32, 19, 174)),
-                Label = "Images",
-                RenderedLabel = new QFontDrawing(),
-                Type = RouletteSlotType.Descrambler
+                Type = RouletteSlotType.SoundTest
             });
 
             // While the list has adjacent elements, bubble shuffle the list
@@ -669,7 +673,11 @@ namespace NativeGL.Screens
                     _categoryHistory.Dequeue();
                 }
 
-                Resources.AudioSubsystem.StopMusic();
+                if (!_timesAlmostUp)
+                {
+                    Resources.AudioSubsystem.StopMusic();
+                }
+
                 WheelSettled(_selectedSlot);
             }
             if (_wheelRotation > TWO_PI)

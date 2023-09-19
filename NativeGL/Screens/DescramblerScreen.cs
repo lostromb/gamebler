@@ -16,29 +16,44 @@ namespace NativeGL.Screens
 {
     public class DescramblerScreen : GameScreen
     {
+        private QFont _questionFont;
+        private QFontDrawing _drawing;
+        private QFontRenderOptions _renderOptions;
+
         private Matrix4 _projectionMatrix;
         private float _time = 0;
         private float _scramble = 0.75f;
         // Number of seconds before scramble is fully zero
         private const float TIME_TO_DESCRAMBLE = 25f;
         private bool _finished = false;
+        private bool _showingAnswer = false;
         private GLTexture _imageTexture;
         private GLTexture _displacementTexture;
-        private string _hint;
+        private DescramblerPrompt _currentPrompt;
 
         protected override void InitializeInternal()
         {
             _displacementTexture = Resources.Textures["displacement"];
+            _questionFont = Resources.Fonts["default_40pt"];
             _projectionMatrix = Matrix4.CreateOrthographicOffCenter(0, InternalResolutionX, InternalResolutionY, 0, -1.0f, 1.0f);
+
+            _drawing = new QFontDrawing();
+            _renderOptions = new QFontRenderOptions()
+            {
+                UseDefaultBlendFunction = true,
+                CharacterSpacing = 0.15f,
+                DropShadowColour = Color.Black,
+                DropShadowActive = true,
+                DropShadowOpacity = 1.0f,
+            };
 
             // Is there an image to show?
             if (GameState.DescramblerImages.Count > 0)
             {
                 // Select a random one and display it
-                DescramblerPrompt chosenPrompt = GameState.DescramblerImages[new Random().Next(0, GameState.DescramblerImages.Count)];
-                GameState.DescramblerImages.Remove(chosenPrompt);
-                _imageTexture = Resources.Textures[chosenPrompt.ImageName];
-                _hint = chosenPrompt.Hint;
+                _currentPrompt = GameState.DescramblerImages[new Random().Next(0, GameState.DescramblerImages.Count)];
+                GameState.DescramblerImages.Remove(_currentPrompt);
+                _imageTexture = Resources.Textures[_currentPrompt.ImageName];
             }
             else
             {
@@ -51,6 +66,10 @@ namespace NativeGL.Screens
             if (args.Key == OpenTK.Input.Key.BackSpace)
             {
                 _finished = true;
+            }
+            else if (args.Key == OpenTK.Input.Key.End)
+            {
+                _showingAnswer = true;
             }
         }
 
@@ -118,9 +137,16 @@ namespace NativeGL.Screens
 
             GL.ActiveTexture(TextureUnit.Texture0);
 
-            // Draw shadow under text
+            // Draw hint text with drop shadow
+            _drawing.ProjectionMatrix = Matrix4.CreateOrthographicOffCenter(0.0f, InternalResolutionX, 0.0f, InternalResolutionY, -1.0f, 1.0f);
+            _drawing.DrawingPrimitives.Clear();
 
-            // Draw hint text
+            float sidePadding = 50;
+            SizeF maxWidth = new SizeF(InternalResolutionX - (sidePadding * 2), -1f);
+            _drawing.Print(_questionFont, _showingAnswer ? _currentPrompt.Answer : _currentPrompt.Hint, new Vector3(InternalResolutionX / 2.0f, 150, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
+            _drawing.RefreshBuffers();
+
+            _drawing.Draw();
         }
 
         public override void Logic(double msElapsed)

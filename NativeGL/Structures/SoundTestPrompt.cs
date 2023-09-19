@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace NativeGL.Structures
 {
-    public class DescramblerPrompt
+    public class SoundTestPrompt
     {
-        public string ImageName;
-        public string Hint;
+        public string MusicName;
         public string Answer;
     }
 }

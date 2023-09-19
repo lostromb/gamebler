@@ -107,7 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Audio\AudioSystem.cs" />
-    <Compile Include="Audio\SpectrographSampleProvider.cs" />
+    <Compile Include="Old\SpectrographSampleProvider.cs" />
     <Compile Include="ButtonPressedEventArgs.cs" />
     <Compile Include="Difficulty.cs" />
     <Compile Include="Old\ArticleOfFaithScreen.cs" />
@@ -127,7 +127,9 @@
     <Compile Include="Structures\DescramblerPrompt.cs" />
     <Compile Include="Structures\PictureQuizQuestion.cs" />
     <Compile Include="Old\PrincipleQuestion.cs" />
+    <Compile Include="Structures\SoundTestPrompt.cs" />
     <Compile Include="Structures\WordDescramblerPrompt.cs" />
+    <Compile Include="Utils\NativeLibraryLoader.cs" />
     <Compile Include="VirtualMouseClick.cs" />
     <Compile Include="VirtualMousePosition.cs" />
     <Compile Include="GameScreen.cs" />

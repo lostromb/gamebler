@@ -41,7 +41,7 @@ namespace NativeGL.Screens
         {
             if (args.Key == OpenTK.Input.Key.BackSpace)
             {
-                Resources.AudioSubsystem.StopMusic();
+                //Resources.AudioSubsystem.StopMusic();
                 _finished = true;
             }
         }

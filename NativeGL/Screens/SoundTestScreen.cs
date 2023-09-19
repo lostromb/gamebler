@@ -16,7 +16,6 @@ namespace NativeGL.Screens
 {
     public class SoundTestScreen : GameScreen
     {
-
         private QFont _questionFont;
         private QFontDrawing _drawing;
         private QFontRenderOptions _renderOptions;
@@ -24,6 +23,8 @@ namespace NativeGL.Screens
         private Matrix4 projectionMatrix;
         private bool _finished = false;
         private float[] _decayBuffer;
+        private SoundTestPrompt _currentPrompt;
+        private bool _showAnswer = false;
 
         protected override void InitializeInternal()
         {
@@ -34,9 +35,9 @@ namespace NativeGL.Screens
             if (GameState.MusicQuizSongs.Count > 0)
             {
                 // Select a random one and play it
-                string musicTrackToPlay = GameState.MusicQuizSongs[new Random().Next(0, GameState.MusicQuizSongs.Count)];
-                GameState.MusicQuizSongs.Remove(musicTrackToPlay);
-                Resources.AudioSubsystem.PlayMusic(musicTrackToPlay);
+                _currentPrompt = GameState.MusicQuizSongs[new Random().Next(0, GameState.MusicQuizSongs.Count)];
+                GameState.MusicQuizSongs.Remove(_currentPrompt);
+                Resources.AudioSubsystem.PlayMusic(_currentPrompt.MusicName);
             }
             else
             {
@@ -65,6 +66,10 @@ namespace NativeGL.Screens
             {
                 Resources.AudioSubsystem.StopMusic();
                 _finished = true;
+            }
+            if (args.Key == OpenTK.Input.Key.End)
+            {
+                _showAnswer = true;
             }
         }
 
