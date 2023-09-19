@@ -43,7 +43,7 @@ namespace NativeGL.Screens
                 _finished = true;
             }
 
-            _questionFont = Resources.Fonts["default"];
+            _questionFont = Resources.Fonts["default_80pt"];
             _drawing = new QFontDrawing();
             _renderOptions = new QFontRenderOptions()
             {

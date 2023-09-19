@@ -149,7 +149,10 @@ namespace NativeGL
             };
 
             returnVal.Fonts["questionheader"] = new QFont(@".\Resources\Generation Two.ttf", 100, fontBuilderConfig);
-            returnVal.Fonts["default"] = new QFont(@".\Resources\segueui.ttf", 80, fontBuilderConfig);
+            returnVal.Fonts["default_80pt"] = new QFont(@".\Resources\segueui.ttf", 80, fontBuilderConfig);
+            returnVal.Fonts["default_60pt"] = new QFont(@".\Resources\segueui.ttf", 60, fontBuilderConfig);
+            returnVal.Fonts["default_40pt"] = new QFont(@".\Resources\segueui.ttf", 40, fontBuilderConfig);
+            returnVal.Fonts["default_20pt"] = new QFont(@".\Resources\segueui.ttf", 20, fontBuilderConfig);
             returnVal.Fonts["wheel"] = new QFont(@".\Resources\segueui.ttf", 24, fontBuilderConfig);
             returnVal.Fonts["score"] = new QFont(@".\Resources\SimplerGr.ttf", 60, fontBuilderConfig);
             returnVal.Fonts["playername"] = new QFont(@".\Resources\segueui.ttf", 40, fontBuilderConfig);

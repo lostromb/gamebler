@@ -14,21 +14,23 @@ using OpenTK.Input;
 
 namespace NativeGL.Screens
 {
-    public class ScribblerScreen : GameScreen
+    public class FeelinGroovyScreen : GameScreen
     {
         private QFont _questionFont;
         private QFont _headerFont;
         private QFontDrawing _drawing;
         private QFontRenderOptions _renderOptions;
 
+        private bool _configured = false;
         private bool _finished = false;
 
         protected override void InitializeInternal()
         {
             _headerFont = Resources.Fonts["questionheader"];
-            _questionFont = Resources.Fonts["default_40pt"];
+            _questionFont = Resources.Fonts["default_80pt"];
 
             _drawing = new QFontDrawing();
+            _configured = true;
 
             _renderOptions = new QFontRenderOptions()
             {
@@ -41,7 +43,6 @@ namespace NativeGL.Screens
         {
             if (args.Key == OpenTK.Input.Key.BackSpace)
             {
-                Resources.AudioSubsystem.StopMusic();
                 _finished = true;
             }
         }
@@ -54,15 +55,19 @@ namespace NativeGL.Screens
         {
             GL.ClearColor(0.0f, 0.0f, 0.0f, 0.0f);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            
+
+            if (!_configured)
+            {
+                return;
+            }
 
             _drawing.ProjectionMatrix = Matrix4.CreateOrthographicOffCenter(0.0f, InternalResolutionX, 0.0f, InternalResolutionY, -1.0f, 1.0f);
             _drawing.DrawingPrimitives.Clear();
 
             float sidePadding = 50;
             SizeF maxWidth = new SizeF(InternalResolutionX - (sidePadding * 2), -1f);
-            _drawing.Print(_headerFont, "DRAWBAGE", new Vector3(InternalResolutionX / 2, InternalResolutionY - sidePadding, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
-            _drawing.Print(_questionFont, "One person will draw the given prompt on the board.\r\n\r\n150 points are awarded if their team can guess correctly what you are drawing within the time limit.\r\n\r\nM.C. will provide the prompt.\r\n\r\nOther team will be allowed 1 guess to steal points if you fail.", new Vector3(sidePadding, InternalResolutionY - 250, 0), maxWidth, QFontAlignment.Justify, _renderOptions);
+            _drawing.Print(_headerFont, "Feelin' Groovy", new Vector3(InternalResolutionX / 2, InternalResolutionY - sidePadding, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
+            _drawing.Print(_questionFont, "Current player gains 150 points", new Vector3(sidePadding, InternalResolutionY - 250, 0), maxWidth, QFontAlignment.Justify, _renderOptions);
             _drawing.RefreshBuffers();
 
             _drawing.Draw();
@@ -70,6 +75,10 @@ namespace NativeGL.Screens
 
         public override void Logic(double msElapsed)
         {
+            if (!_configured)
+            {
+                return;
+            }
         }
 
         public override bool Finished

@@ -38,7 +38,7 @@ namespace NativeGL.Screens
                 Characters = CharacterSet.BasicSet
             };
 
-            _entryFont = Resources.Fonts["default"];
+            _entryFont = Resources.Fonts["default_80pt"];
             _titleFont = Resources.Fonts["questionheader"];
 
             _drawing = new QFontDrawing();

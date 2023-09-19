@@ -96,7 +96,11 @@
     <Compile Include="ButtonPressedEventArgs.cs" />
     <Compile Include="Difficulty.cs" />
     <Compile Include="Old\ArticleOfFaithScreen.cs" />
+    <Compile Include="Screens\ArenaScreen.cs" />
+    <Compile Include="Screens\BetrayalScreen.cs" />
     <Compile Include="Screens\DifficultySelectScreen.cs" />
+    <Compile Include="Screens\FeelinGroovyScreen.cs" />
+    <Compile Include="Screens\FeelinSadScreen.cs" />
     <Compile Include="Screens\PictureQuizScreen.cs" />
     <Compile Include="Screens\PlayerEntryScreen.cs" />
     <Compile Include="Old\ShoutoutScreen.cs" />
