@@ -80,6 +80,21 @@
     <Content Include="Resources\Avatars\35.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Avatars\36.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Avatars\37.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Avatars\38.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Avatars\39.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Avatars\40.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Generation Two.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -109,8 +124,10 @@
     <Compile Include="Screens\SoundTestScreen.cs" />
     <Compile Include="Old\StorytimeScreen.cs" />
     <Compile Include="Old\ArticleOfFaith.cs" />
+    <Compile Include="Structures\DescramblerPrompt.cs" />
     <Compile Include="Structures\PictureQuizQuestion.cs" />
     <Compile Include="Old\PrincipleQuestion.cs" />
+    <Compile Include="Structures\WordDescramblerPrompt.cs" />
     <Compile Include="VirtualMouseClick.cs" />
     <Compile Include="VirtualMousePosition.cs" />
     <Compile Include="GameScreen.cs" />
@@ -225,15 +242,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Questions\Shoutouts.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <Content Include="Resources\UbuntuMono-R.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\Questions\WordDescrambler.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\Vert_Std.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -257,16 +268,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Avatars\10.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Music\Data Select.opus">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Music\Data Select_Intro.opus">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Music\Randomizer.opus">
+    <Content Include="Resources\Music\*.opus">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -276,30 +278,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Textures\displacement.png">
+    <Content Include="Resources\Textures\*.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Textures\wheel hub.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Textures\wheel tex.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Textures\background.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Textures\geodude.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Textures\hamster.jpg">
+    <Content Include="Resources\Textures\*.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Questions\*.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Questions\*.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

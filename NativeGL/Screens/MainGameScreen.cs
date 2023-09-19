@@ -344,7 +344,8 @@ namespace NativeGL.Screens
             float avatarPadding = 20;
             float avatarAreaWidth = 800;
             float avSize = Math.Min(200, (InternalResolutionY / (float)GameState.Players.Count) - avatarPadding);
-            float playerOffsetY = InternalResolutionY - avSize - (avatarPadding / 2);
+            float totalPlayerAreaHeight = (GameState.Players.Count * avSize) + ((GameState.Players.Count - 1) * avatarPadding);
+            float playerOffsetY = ((InternalResolutionY - totalPlayerAreaHeight) / 2) + avSize + avatarPadding;
 
             _playerAreaText.DrawingPrimitives.Clear();
             _playerAreaText.ProjectionMatrix = _projectionMatrix;
@@ -607,9 +608,17 @@ namespace NativeGL.Screens
             {
                 Weight = 3.0f,
                 Color = FromColor(Color.FromArgb(32, 19, 174)),
-                Label = "Debug",
+                Label = "Words",
                 RenderedLabel = new QFontDrawing(),
                 Type = RouletteSlotType.WordDescrambler
+            });
+            returnVal.Add(new RouletteSlot()
+            {
+                Weight = 3.0f,
+                Color = FromColor(Color.FromArgb(32, 19, 174)),
+                Label = "Images",
+                RenderedLabel = new QFontDrawing(),
+                Type = RouletteSlotType.Descrambler
             });
 
             // While the list has adjacent elements, bubble shuffle the list
@@ -681,7 +690,8 @@ namespace NativeGL.Screens
                 float avatarPadding = 20;
                 float avatarAreaWidth = 800;
                 float avSize = Math.Min(200, (InternalResolutionY / (float)GameState.Players.Count) - avatarPadding);
-                float playerOffsetY = (avatarPadding / 2);
+                float totalPlayerAreaHeight = (GameState.Players.Count * avSize) + ((GameState.Players.Count - 1) * avatarPadding);
+                float playerOffsetY = (InternalResolutionY - totalPlayerAreaHeight) / 2;
                 float avatarAreaLeft = InternalResolutionX - avatarAreaWidth - avatarPadding;
                 for (int playerIndex = 0; playerIndex < GameState.Players.Count; playerIndex++)
                 {

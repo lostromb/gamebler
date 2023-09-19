@@ -17,7 +17,8 @@ namespace NativeGL.Screens
 {
     public class WordDescramblerScreen : GameScreen
     {
-        private QFont _questionFont;
+        private QFont _puzzleFont;
+        private QFont _hintFont;
         private QFont _headerFont;
         private QFontDrawing _drawing;
         private QFontRenderOptions _renderOptions;
@@ -31,6 +32,7 @@ namespace NativeGL.Screens
         private const double TARGET_SOLVE_TIME_MS = 30000;
 
         private int _currentWordLetterCount = 0;
+        private string _currentHint = string.Empty;
         private string _currentWord = string.Empty;
         private string _currentDisplayWord = string.Empty;
         private int _currentWordScrambleCount = 0;
@@ -40,7 +42,7 @@ namespace NativeGL.Screens
             if (GameState.WordDescramberWords.Count > 0)
             {
                 // Select a random one and play it
-                string wordToDisplay = GameState.WordDescramberWords[new Random().Next(0, GameState.WordDescramberWords.Count)];
+                WordDescramblerPrompt wordToDisplay = GameState.WordDescramberWords[new Random().Next(0, GameState.WordDescramberWords.Count)];
                 GameState.WordDescramberWords.Remove(wordToDisplay);
                 InitializeWord(wordToDisplay);
             }
@@ -50,7 +52,8 @@ namespace NativeGL.Screens
             }
 
             _headerFont = Resources.Fonts["questionheader"];
-            _questionFont = Resources.Fonts["monospace"];
+            _hintFont = Resources.Fonts["default_40pt"];
+            _puzzleFont = Resources.Fonts["monospace"];
 
             _drawing = new QFontDrawing();
 
@@ -97,8 +100,9 @@ namespace NativeGL.Screens
 
             float sidePadding = 50;
             SizeF maxWidth = new SizeF(InternalResolutionX - (sidePadding * 2), -1f);
-            _drawing.Print(_headerFont, "FILL IN THE BLANKS", new Vector3(InternalResolutionX / 2, InternalResolutionY - sidePadding, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
-            _drawing.Print(_questionFont, _currentDisplayWord, new Vector3(InternalResolutionX / 2, InternalResolutionY - 250, 0), maxWidth, QFontAlignment.Centre, _monoRenderOptions);
+            _drawing.Print(_headerFont, "MISSING LETTERS", new Vector3(InternalResolutionX / 2, InternalResolutionY - sidePadding, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
+            _drawing.Print(_hintFont, "Hint: " + _currentHint, new Vector3(InternalResolutionX / 2, 100, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
+            _drawing.Print(_puzzleFont, _currentDisplayWord, new Vector3(InternalResolutionX / 2, InternalResolutionY - 250, 0), maxWidth, QFontAlignment.Centre, _monoRenderOptions);
             _drawing.RefreshBuffers();
 
             _drawing.Draw();
@@ -137,15 +141,16 @@ namespace NativeGL.Screens
             }
         }
 
-        private void InitializeWord(string word)
+        private void InitializeWord(WordDescramblerPrompt word)
         {
-            _currentWord = word;
+            _currentWord = word.Text;
+            _currentHint = word.Hint;
             _currentWordLetterCount = LetterCount(_currentWord);
             _currentWordScrambleCount = _currentWordLetterCount;
             StringBuilder b = new StringBuilder(_currentWord.Length);
             for (int c = 0; c < _currentWord.Length; c++)
             {
-                if (char.IsWhiteSpace(word[c]))
+                if (char.IsWhiteSpace(_currentWord[c]))
                 {
                     b.Append(' ');
                 }

@@ -2,7 +2,7 @@
 { "Category": "Minecraft", "QuestionText": "In Minecraft, what mob do Creepers run away from?", "Answer": "Cat", "Incorrect": [ "Hoglin", "Horse", "Warden" ] },
 { "Category": "Fortnite", "QuestionText": "Which character in Fortnite is shaped like a banana?", "Answer": "Peely", "Incorrect": [ "Willy", "Skinny", "Slippy" ] },
 { "Category": "Soccer", "QuestionText": "Which soccer team won the 2022 World Cup in Qatar?", "Answer": "Argentina", "Incorrect": [ "France", "Brazil", "Croatia" ] },
-{ "Category": "Cartoons", "QuestionText": "In the animated TV series Ben 10: Omniverse, what is the name of the alien plumber who is the partner of the protagonist Ben Tennyson?", "Answer": "Rook", "Incorrect": [ "Skurd", "Zed", "Max" ] },
+{ "Category": "Cartoons", "QuestionText": "In the animated TV series 'Ben 10: Omniverse', what is the name of the alien plumber who is the partner of the protagonist Ben Tennyson?", "Answer": "Rook", "Incorrect": [ "Skurd", "Zed", "Max" ] },
 { "Category": "Star Wars", "QuestionText": "In the Star Wars universe, Cloud City is located above which planet?", "Answer": "Bespin", "Incorrect": [ "Dantooine", "Degobah", "Alderaan" ] },
 { "Category": "Football", "QuestionText": "Which city do the Chargers play football for?", "Answer": "Los Angeles", "Incorrect": [ "St. Louis", "Kansas City", "Denver" ] },
 { "Category": "Hockey", "QuestionText": "Wayne Gretzky first played league ice hockey for which team?", "Answer": "Edmonton Oilers", "Incorrect": [ "Ottowa Senators", "Montreal Canadiens", "Winnipeg Jets" ] },
@@ -30,9 +30,10 @@
 { "Category": "Star Wars", "QuestionText": "This Jedi survived Order 66 and lived undercover as a shipbreaker on planet Bracca for several years", "Answer": "Cal Kestis", "Incorrect": [ "Ahsoka Tano", "Obi-Wan Kenobi", "Kyle Katarn" ] },
 { "Category": "Star Wars", "QuestionText": "\"Have you ever heard the tragedy of ____?\"", "Answer": "Darth Plagueis the Wise", "Incorrect": [ "Darth Bane the Warrior", "Darth Sidious the Emperor", "Darth Vader the Hateful" ] },
 { "Category": "Spelling", "QuestionText": "Which spelling of this word is correct?", "Answer": "Absent", "Incorrect": [ "Abscent", "Abcent", "Abbsent" ] },
+{ "Category": "Spelling", "QuestionText": "Which spelling of this word is correct?", "Answer": "Synonym", "Incorrect": [ "Sinonym", "Synonim", "Sinonim" ] },
 { "Category": "Math", "QuestionText": "What is the square root of 36?", "Answer": "6", "Incorrect": [ "18", "3", "30" ] },
-
 { "Category": "Geography", "QuestionText": "Which river forms part of the border between the U.S.A. and Mexico?", "Answer": "The Rio Grande", "Incorrect": [ "The Mississippi", "The San Joaquin", "The Colorado" ] },
+{ "Category": "Science", "QuestionText": "About how long does it take for the light from the Sun to reach Earth?", "Answer": "8 minutes", "Incorrect": [ "18 seconds", "3 minutes", "20 minutes" ] },
 ]
 
 

@@ -24,6 +24,7 @@ namespace NativeGL.Screens
         private bool _finished = false;
         private GLTexture _imageTexture;
         private GLTexture _displacementTexture;
+        private string _hint;
 
         protected override void InitializeInternal()
         {
@@ -34,9 +35,10 @@ namespace NativeGL.Screens
             if (GameState.DescramblerImages.Count > 0)
             {
                 // Select a random one and display it
-                string textureImage = GameState.DescramblerImages[new Random().Next(0, GameState.DescramblerImages.Count)];
-                GameState.DescramblerImages.Remove(textureImage);
-                _imageTexture = Resources.Textures[textureImage];
+                DescramblerPrompt chosenPrompt = GameState.DescramblerImages[new Random().Next(0, GameState.DescramblerImages.Count)];
+                GameState.DescramblerImages.Remove(chosenPrompt);
+                _imageTexture = Resources.Textures[chosenPrompt.ImageName];
+                _hint = chosenPrompt.Hint;
             }
             else
             {
@@ -115,6 +117,10 @@ namespace NativeGL.Screens
             GL.End();
 
             GL.ActiveTexture(TextureUnit.Texture0);
+
+            // Draw shadow under text
+
+            // Draw hint text
         }
 
         public override void Logic(double msElapsed)
