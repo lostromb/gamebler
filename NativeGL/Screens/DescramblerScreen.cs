@@ -22,7 +22,7 @@ namespace NativeGL.Screens
 
         private Matrix4 _projectionMatrix;
         private float _time = 0;
-        private float _scramble = 0.75f;
+        private float _scramble = 0.85f;
         // Number of seconds before scramble is fully zero
         private const float TIME_TO_DESCRAMBLE = 25f;
         private bool _finished = false;
@@ -152,7 +152,7 @@ namespace NativeGL.Screens
         public override void Logic(double msElapsed)
         {
             _time += ((float)msElapsed * 0.001f);
-            _scramble = 0.75f * Math.Max(0, 1.0f - (_time / TIME_TO_DESCRAMBLE));
+            _scramble = 0.85f * Math.Max(0, 1.0f - (_time / TIME_TO_DESCRAMBLE));
         }
 
         public override bool Finished

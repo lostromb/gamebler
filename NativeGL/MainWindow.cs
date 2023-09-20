@@ -1,37 +1,25 @@
-﻿using NativeGL;
-using NativeGL.Screens;
-using OpenTK;
-using OpenTK.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using OpenTK.Graphics.OpenGL;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using QuickFont;
-using QuickFont.Configuration;
-using System.Drawing.Text;
-using NativeGL.Structures;
-using OpenTK.Input;
-using Newtonsoft.Json;
-using Durandal.Common.Utils;
-using Durandal.Common.Logger;
-using Durandal.Common.File;
-using Durandal.Common.Speech.Triggers;
-using Durandal.Common.Audio;
-using Durandal.Common.Audio.Components;
-using Durandal.Extensions.NAudio.Devices;
-using Durandal.Common.Utils.NativePlatform;
-using Durandal.Common.Time;
-using Durandal.Common.Tasks;
+﻿using Durandal.Common.Audio;
 using Durandal.Common.Audio.Codecs;
 using Durandal.Common.Audio.Codecs.Opus;
+using Durandal.Common.Audio.Components;
+using Durandal.Common.Logger;
+using Durandal.Common.Tasks;
+using Durandal.Common.Time;
+using Durandal.Common.Utils;
 using NativeGL.Audio;
+using NativeGL.Screens;
+using NativeGL.Structures;
+using Newtonsoft.Json;
+using OpenTK;
+using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
+using QuickFont;
+using QuickFont.Configuration;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 
 namespace NativeGL
 {
@@ -94,6 +82,7 @@ namespace NativeGL
             {
                 foreach (FileInfo textureFile in textureDirectory.EnumerateFiles())
                 {
+                    Console.WriteLine("Loading " + textureFile.Name);
                     string name = textureFile.Name.Substring(0, textureFile.Name.Length - textureFile.Extension.Length);
                     returnVal.Textures[name] = GLTexture.Load(textureFile);
                 }

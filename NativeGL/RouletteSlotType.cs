@@ -18,5 +18,6 @@ namespace NativeGL
         FeelinSad,
         FeelinGroovy,
         WordDescrambler,
+        BigShot,
     }
 }

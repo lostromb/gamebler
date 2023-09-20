@@ -13,6 +13,7 @@ using NativeGL.Structures;
 using OpenTK.Input;
 using Durandal.Common.Audio.Components;
 using System.Diagnostics;
+using Durandal.Common.Logger;
 
 namespace NativeGL.Screens
 {
@@ -40,8 +41,9 @@ namespace NativeGL.Screens
         private QFont _playerNameFont;
         private QFontDrawing _playerAreaText;
         private List<GLButton> _playerButtons;
-
+        private int _currentPlayerTurnIdx = 0;
         private bool _timesAlmostUp = false;
+        private int _turnIdx = 0;
 
         protected override void InitializeInternal()
         {
@@ -113,6 +115,23 @@ namespace NativeGL.Screens
 
             return RouletteSlotType.Unknown;
         }
+
+        private float TryTargetWheelSegment(RouletteSlotType target)
+        {
+            Random rand = new Random();
+            float returnVal = 0;
+            for (int attempt = 0; attempt < 1000; attempt++)
+            {
+                returnVal = (float)((rand.NextDouble() * 1.5) + 0.5) * INITIAL_SPIN_SPEED;
+                RouletteSlotType inferredTarget = PredictOutcome(returnVal);
+                if (target == inferredTarget)
+                {
+                    return returnVal;
+                }
+            }
+
+            return returnVal;
+        }
          
         public override void KeyDown(KeyboardKeyEventArgs args)
         {
@@ -125,43 +144,68 @@ namespace NativeGL.Screens
                 {
                     Random rand = new Random();
 
+                    int currentPlayerPoints = GameState.Players[_currentPlayerTurnIdx].Score;
+                    int highestPlayerPoints = GameState.Players.Max((s) => s.Score);
+                    int lowestPlayerPoints = GameState.Players.Min((s) => s.Score);
                     float hypVelocity;
                     bool outcomeOk;
                     int outcomeRetries = 0;
+                    RouletteSlotType predictedOutcome;
                     do
                     {
                         // Manipulate the wheel outcome here
                         hypVelocity = (float)((rand.NextDouble() * 1.5) + 0.5) * INITIAL_SPIN_SPEED;
-                        RouletteSlotType predictedOutcome = PredictOutcome(hypVelocity);
+                        predictedOutcome = PredictOutcome(hypVelocity);
                         outcomeOk = true;
 
                         // Disallow the same category multiple times in a row
-                        if (_categoryHistory.Contains(predictedOutcome))
+                            if (_categoryHistory.Contains(predictedOutcome))
                         {
                             outcomeOk = false;
                         }
 
-                        // Disallow more than one round of Betrayal
-                        if (predictedOutcome == RouletteSlotType.PrisonerDilemma &&
+                        // Disallow more than one round of Betrayal or BigShot
+                        if ((predictedOutcome == RouletteSlotType.PrisonerDilemma || predictedOutcome == RouletteSlotType.BigShot) &&
                             _allPlayedCategories.Contains(predictedOutcome))
                         {
                             outcomeOk = false;
                         }
 
-                        // Disallow feelin' sad when any player has zero points
+                        // Disallow feelin' sad for the player with fewest points
                         if (predictedOutcome == RouletteSlotType.FeelinSad &&
-                            GameState.Players.Any((s) => s.Score <= 0))
+                            currentPlayerPoints == lowestPlayerPoints)
+                        {
+                            outcomeOk = false;
+                        }
+
+                        // Disallow bigshot for the player with most points
+                        if (predictedOutcome == RouletteSlotType.BigShot &&
+                            currentPlayerPoints == highestPlayerPoints)
                         {
                             outcomeOk = false;
                         }
 
                         // Disallow A.I. arena and prisoners dilemma when players have low score totals
                         if ((predictedOutcome == RouletteSlotType.AIArena || predictedOutcome == RouletteSlotType.PrisonerDilemma) &&
-                            GameState.Players.Any((s) => s.Score < 150))
+                            lowestPlayerPoints < 150)
                         {
                             outcomeOk = false;
                         }
                     } while (!outcomeOk && outcomeRetries++ < 50);
+
+                    // Is it time to deploy the BIGSHOT?
+                    if (!_allPlayedCategories.Contains(RouletteSlotType.BigShot) &&
+                        currentPlayerPoints == lowestPlayerPoints && 
+                        _rouletteSlots.Any((s) => s.Type == RouletteSlotType.BigShot) &&
+                        rand.NextDouble() < (double)(highestPlayerPoints - currentPlayerPoints) / 1000.0)
+                    {
+                        Console.WriteLine("Deploying BIG SHOT");
+                        hypVelocity = TryTargetWheelSegment(RouletteSlotType.BigShot);
+                        predictedOutcome = RouletteSlotType.BigShot;
+                    }
+
+                    Console.WriteLine("Predicted outcome: " + predictedOutcome);
+
                     _wheelVelocity = hypVelocity;
                     if (!_timesAlmostUp)
                     {
@@ -200,6 +244,9 @@ namespace NativeGL.Screens
                         case RouletteSlotType.FeelinSad:
                             EnqueueScreen(new FeelinSadScreen());
                             break;
+                        case RouletteSlotType.BigShot:
+                            EnqueueScreen(new BigShotScreen());
+                            break;
                         default:
                             EnqueueScreen(new EmptyScreen());
                             break;
@@ -209,6 +256,22 @@ namespace NativeGL.Screens
                     {
                         _allPlayedCategories.Add(_selectedSlot.Type);
                     }
+
+                    _turnIdx++;
+                    _currentPlayerTurnIdx = (_currentPlayerTurnIdx + 1) % GameState.Players.Count;
+
+                    // Sneak in BIGSHOT on turn 7
+                    if (_turnIdx == 7)
+                    {
+                        _rouletteSlots.Add(new RouletteSlot()
+                        {
+                            Weight = 2.0f,
+                            Color = FromColor(Color.FromArgb(247, 204, 10)),
+                            Label = "BIG SHOT",
+                            RenderedLabel = new QFontDrawing(),
+                            Type = RouletteSlotType.BigShot
+                        });
+                    }
                 }
             }
 
@@ -216,6 +279,18 @@ namespace NativeGL.Screens
             {
                 _timesAlmostUp = true;
                 Resources.AudioSubsystem.PlayMusic("pizza");
+            }
+            else if (args.Key == OpenTK.Input.Key.PageDown)
+            {
+                _currentPlayerTurnIdx = (_currentPlayerTurnIdx + 1) % GameState.Players.Count;
+            }
+            else if (args.Key == OpenTK.Input.Key.PageUp)
+            {
+                _currentPlayerTurnIdx -= 1;
+                if (_currentPlayerTurnIdx < 0)
+                {
+                    _currentPlayerTurnIdx += GameState.Players.Count;
+                }
             }
         }
 
@@ -375,19 +450,27 @@ namespace NativeGL.Screens
                     _playerButtons[playerIdx].Render();
                 }
 
-                //GL.UseProgram(Resources.Shaders["solidcolor"].Handle);
-                //GL.UniformMatrix4(GL.GetUniformLocation(Resources.Shaders["solidcolor"].Handle, "projectionMatrix"), false, ref _projectionMatrix);
-                //GL.UniformMatrix4(GL.GetUniformLocation(Resources.Shaders["solidcolor"].Handle, "modelViewMatrix"), false, ref modelViewMatrix);
+                if (playerIdx == _currentPlayerTurnIdx)
+                {
+                    // Current player selection indicator
+                    GL.UseProgram(Resources.Shaders["solidcolor"].Handle);
+                    GL.UniformMatrix4(GL.GetUniformLocation(Resources.Shaders["solidcolor"].Handle, "projectionMatrix"), false, ref _projectionMatrix);
+                    GL.UniformMatrix4(GL.GetUniformLocation(Resources.Shaders["solidcolor"].Handle, "modelViewMatrix"), false, ref modelViewMatrix);
 
-                //GL.Color4(0.0f, 0.0f, 0.0f, 0.4f);
-                //GL.Begin(PrimitiveType.Quads);
-                //{
-                //    GL.Vertex2(avatarAreaWidth, 0);
-                //    GL.Vertex2(avatarAreaWidth, avSize);
-                //    GL.Vertex2(0, avSize);
-                //    GL.Vertex2(0, 0);
-                //}
-                //GL.End();
+                    GL.Begin(PrimitiveType.Quads);
+                    {
+                        GL.Color4(0.0f, 1.0f, 0.0f, 1.0f);
+                        GL.Vertex2(0, avSize);
+                        GL.Vertex2(0, 0);
+                        GL.Color4(0.0f, 1.0f, 0.0f, 0.0f);
+                        GL.Vertex2(avatarAreaWidth, 0);
+                        GL.Vertex2(avatarAreaWidth, avSize);
+                    }
+                    GL.End();
+
+                    // Offset current player to the left
+                    //modelViewMatrix = Matrix4.CreateTranslation(-50, 0, 0.0f) * modelViewMatrix;
+                }
 
                 GL.Enable(EnableCap.Texture2D);
                 GL.Enable(EnableCap.Blend);
@@ -615,15 +698,15 @@ namespace NativeGL.Screens
                 });
             }
 
-            returnVal.Clear();
-            returnVal.Add(new RouletteSlot()
-            {
-                Weight = 3.0f,
-                Color = FromColor(Color.FromArgb(32, 19, 174)),
-                Label = "Debug",
-                RenderedLabel = new QFontDrawing(),
-                Type = RouletteSlotType.SoundTest
-            });
+            //returnVal.Clear();
+            //returnVal.Add(new RouletteSlot()
+            //{
+            //    Weight = 3.0f,
+            //    Color = FromColor(Color.FromArgb(32, 19, 174)),
+            //    Label = "Debug",
+            //    RenderedLabel = new QFontDrawing(),
+            //    Type = RouletteSlotType.BigShot
+            //});
 
             // While the list has adjacent elements, bubble shuffle the list
             if (returnVal.Count > 2)
@@ -660,13 +743,11 @@ namespace NativeGL.Screens
         public override void Logic(double msElapsed)
         {
             msElapsed = 33.33f; // hack for locked 30fps
-            _wheelRotation += _wheelVelocity * (float)msElapsed;
-            _wheelVelocity *= WHEEL_DRAG;
             if (!_wheelLocked && _wheelVelocity < MIN_VELOCITY)
             {
                 _wheelVelocity = 0;
                 _wheelLocked = true;
-                
+
                 _categoryHistory.Enqueue(_selectedSlot.Type);
                 if (_categoryHistory.Count > 2)
                 {
@@ -680,9 +761,14 @@ namespace NativeGL.Screens
 
                 WheelSettled(_selectedSlot);
             }
-            if (_wheelRotation > TWO_PI)
+            else
             {
-                _wheelRotation -= TWO_PI;
+                _wheelRotation += _wheelVelocity * (float)msElapsed;
+                _wheelVelocity *= WHEEL_DRAG;
+                if (_wheelRotation > TWO_PI)
+                {
+                    _wheelRotation -= TWO_PI;
+                }
             }
 
             // Create buttons for each player if the current buttons are inconsistent
@@ -713,6 +799,11 @@ namespace NativeGL.Screens
 
         private void WheelSettled(RouletteSlot selectedSlot)
         {
+            if (_timesAlmostUp)
+            {
+                return;
+            }
+
             if (selectedSlot.Type == RouletteSlotType.FeelinGroovy)
             {
                 Resources.AudioSubsystem.PlaySound(Resources.SoundEffects["victory"]);
@@ -732,6 +823,14 @@ namespace NativeGL.Screens
             get
             {
                 return false;
+            }
+        }
+
+        public override void ScreenAboveFinished(GameScreen aboveScreen)
+        {
+            if (aboveScreen is BigShotScreen)
+            {
+                Resources.AudioSubsystem.StopMusic();
             }
         }
 
