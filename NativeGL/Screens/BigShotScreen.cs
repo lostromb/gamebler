@@ -109,7 +109,7 @@ namespace NativeGL.Screens
                 if (val < 0.3)
                 {
                     sb.Append(_kromer);
-                    sb.Append(" KROMER");
+                    sb.Append(" KROMER ");
                     sb.Append('!', rand.Next(1, 10));
                     _nextTextUpdate = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(3);
                 }
@@ -124,14 +124,19 @@ namespace NativeGL.Screens
                 else if (val < 0.6)
                 {
                     sb.Append(_kromer);
-                    sb.Append(",000 KROMER");
+                    sb.Append(",000 KROMER ");
                     sb.Append('!', rand.Next(1, 4));
                     _nextTextUpdate = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(3);
                 }
                 else if (val < 0.7)
                 {
-                    sb.Append("[ERROR: SCORE OUT OF RANGE]");
+                    sb.Append("[ERROR: HYPERLINK BLOCKED]");
                     _nextTextUpdate = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(1);
+                }
+                else if (val < 0.8)
+                {
+                    sb.Append("Go Large or Go Away!");
+                    _nextTextUpdate = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(2);
                 }
                 else if (val < 0.9)
                 {
@@ -560,6 +565,7 @@ namespace NativeGL.Screens
             {
                 _animationTimer = 0.0f;
                 _animationTimerIncrement = 0;
+                Resources.AudioSubsystem.StopMusic();
                 _finished = true;
             }
 

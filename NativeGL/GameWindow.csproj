@@ -118,9 +118,11 @@
     <Compile Include="Screens\DifficultySelectScreen.cs" />
     <Compile Include="Screens\FeelinGroovyScreen.cs" />
     <Compile Include="Screens\FeelinSadScreen.cs" />
-    <Compile Include="Screens\PictureQuizScreen.cs" />
+    <Compile Include="Old\PictureQuizScreen.cs" />
     <Compile Include="Screens\PlayerEntryScreen.cs" />
     <Compile Include="Old\ShoutoutScreen.cs" />
+    <Compile Include="Screens\QuizzlerQuestionScreen.cs" />
+    <Compile Include="Screens\QuizzlerScreen.cs" />
     <Compile Include="Screens\WordDescramblerScreen.cs" />
     <Compile Include="Screens\ScribblerScreen.cs" />
     <Compile Include="Screens\SoundTestScreen.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="Structures\DescramblerPrompt.cs" />
     <Compile Include="Structures\PictureQuizQuestion.cs" />
     <Compile Include="Old\PrincipleQuestion.cs" />
+    <Compile Include="Structures\QuizzlerQuestion.cs" />
     <Compile Include="Structures\SoundTestPrompt.cs" />
     <Compile Include="Structures\WordDescramblerPrompt.cs" />
     <Compile Include="Utils\NativeLibraryLoader.cs" />

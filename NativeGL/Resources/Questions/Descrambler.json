@@ -1,5 +1,8 @@
 [
 	{ "Hint": "Who's That Pokémon?", "ImageName": "growlithe", "Answer": "It's Growlithe!" },
-	{ "Hint": "Hint: Logo", "ImageName": "mrbeast", "Answer": "The MrBeast Logo" },
+	{ "Hint": "", "ImageName": "mrbeast", "Answer": "The MrBeast Logo" },
 	{ "Hint": "Name this Roblox game", "ImageName": "squid game", "Answer": "Squid Game" },
+	{ "Hint": "This is Bro. Stromberg's favorite apostle", "ImageName": "holland", "Answer": "Jeffrey R. Holland" },
+	{ "Hint": "Name this Game", "ImageName": "rift apart", "Answer": "Ratchet & Clank: Rift Apart" },
+	{ "Hint": "Name this Game", "ImageName": "deer sim", "Answer": "DEEEER Simulator" },
 ]

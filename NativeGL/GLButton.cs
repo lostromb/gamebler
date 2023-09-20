@@ -26,7 +26,7 @@ namespace NativeGL
         private bool _mouseOver;
         private bool _enabled;
 
-        public GLButton(StaticResources resources, float x, float y, float w, float h, string text, string id)
+        public GLButton(StaticResources resources, float x, float y, float w, float h, string text, string id, QFont font = null)
         {
             _x = x;
             _y = 1080 - y;
@@ -35,7 +35,7 @@ namespace NativeGL
             _text = text;
             _resources = resources;
             _id = id;
-            _font = _resources.Fonts["playername"];
+            _font = font ?? _resources.Fonts["playername"];
             _mouseOver = false;
             _enabled = true;
 

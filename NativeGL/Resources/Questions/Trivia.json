@@ -25,7 +25,7 @@
 { "Category": "Minecraft", "QuestionText": "In Minecraft, if a villager gets struck by lightning, what do they turn into?", "Answer": "Witch", "Incorrect": [ "Husk", "Skeleton", "Pillager" ] },
 { "Category": "Minecraft", "QuestionText": "In Minecraft, what is the name of the Ender Dragon?", "Answer": "Jean", "Incorrect": [ "Blaze", "Saphira", "Jade" ] },
 { "Category": "Nintendo", "QuestionText": "What boss do you fight in the prologue of Metroid Prime?", "Answer": "Parasite Queen", "Incorrect": [ "Flaahgra", "Omega Pirate", "Meta Ridley" ] },
-{ "Category": "Fornite", "QuestionText": "In Fortnite, which consumable spawns a random prop from above to crush foes?", "Answer": "Junk Rift", "Incorrect": [ "Prop Spawner", "Port-a-Fort", "Rift-2-Go" ] },
+{ "Category": "Fortnite", "QuestionText": "In Fortnite, which consumable spawns a random prop from above to crush foes?", "Answer": "Junk Rift", "Incorrect": [ "Prop Spawner", "Port-a-Fort", "Rift-2-Go" ] },
 { "Category": "Sonic the Hedgehog", "QuestionText": "What is Sonic the Hedgehog's favorite food?", "Answer": "Chili Dogs", "Incorrect": [ "Pizza", "Mint Candy", "Spicy Chicken" ] },
 { "Category": "Star Wars", "QuestionText": "This Jedi survived Order 66 and lived undercover as a shipbreaker on planet Bracca for several years", "Answer": "Cal Kestis", "Incorrect": [ "Ahsoka Tano", "Obi-Wan Kenobi", "Kyle Katarn" ] },
 { "Category": "Star Wars", "QuestionText": "\"Have you ever heard the tragedy of ____?\"", "Answer": "Darth Plagueis the Wise", "Incorrect": [ "Darth Bane the Warrior", "Darth Sidious the Emperor", "Darth Vader the Hateful" ] },
@@ -35,9 +35,3 @@
 { "Category": "Geography", "QuestionText": "Which river forms part of the border between the U.S.A. and Mexico?", "Answer": "The Rio Grande", "Incorrect": [ "The Mississippi", "The San Joaquin", "The Colorado" ] },
 { "Category": "Science", "QuestionText": "About how long does it take for the light from the Sun to reach Earth?", "Answer": "8 minutes", "Incorrect": [ "18 seconds", "3 minutes", "20 minutes" ] },
 ]
-
-
-{ "Category": "Cereal", "QuestionText": "What cereal was originally called 'Elijah’s Manna'?", "Answer": "Shredded Wheat", "Incorrect": [ "Crispix", "Cheerios", "Corn Flakes" ] },
-
-
-{ "Category": "CATEGORY", "QuestionText": "qUESTION", "Answer": "ANSWER", "Incorrect": [ "BAD", "BAD", "BAD" ] },

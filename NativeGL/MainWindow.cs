@@ -55,11 +55,16 @@ namespace NativeGL
 
             _gameState = new GlobalGameState();
 
-            _gameState.PictureQuizQuestions = JsonConvert.DeserializeObject<List<PictureQuizQuestion>>(File.ReadAllText(@".\Resources\Questions\PictureQuiz.json"));
+            _gameState.QuizQuestions = JsonConvert.DeserializeObject<List<QuizzlerQuestion>>(File.ReadAllText(@".\Resources\Questions\Trivia.json"));
             _gameState.MusicQuizSongs = JsonConvert.DeserializeObject<List<SoundTestPrompt>>(File.ReadAllText(@".\Resources\Questions\Songs.json"));
             _gameState.DescramblerImages = JsonConvert.DeserializeObject<List<DescramblerPrompt>>(File.ReadAllText(@".\Resources\Questions\Descrambler.json"));
             _gameState.WordDescramberWords = JsonConvert.DeserializeObject<List<WordDescramblerPrompt>>(File.ReadAllText(@".\Resources\Questions\WordDescrambler.json"));
            
+            for (int id = 0; id < _gameState.QuizQuestions.Count; id++)
+            {
+                _gameState.QuizQuestions[id].Id = id;
+            }
+
             _staticResources.AudioSubsystem = new AudioSystem(_logger.Clone("AudioSystem"));
 
             _gameScreenStack = new List<GameScreen>();

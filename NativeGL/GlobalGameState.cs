@@ -7,7 +7,7 @@ namespace NativeGL
     {
         public List<Player> Players = new List<Player>();
         public List<SoundTestPrompt> MusicQuizSongs = new List<SoundTestPrompt>();
-        public List<PictureQuizQuestion> PictureQuizQuestions = new List<PictureQuizQuestion>();
+        public List<QuizzlerQuestion> QuizQuestions = new List<QuizzlerQuestion>();
         public List<DescramblerPrompt> DescramblerImages = new List<DescramblerPrompt>();
         public List<WordDescramblerPrompt> WordDescramberWords = new List<WordDescramblerPrompt>();
     }

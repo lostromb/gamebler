@@ -229,6 +229,9 @@ namespace NativeGL.Screens
                         case RouletteSlotType.PrisonerDilemma:
                             EnqueueScreen(new BetrayalScreen());
                             break;
+                        case RouletteSlotType.Quizzler:
+                            EnqueueScreen(new QuizzlerScreen());
+                            break;
                         case RouletteSlotType.Drawbage:
                             EnqueueScreen(new ScribblerScreen());
                             break;
@@ -698,15 +701,15 @@ namespace NativeGL.Screens
                 });
             }
 
-            //returnVal.Clear();
-            //returnVal.Add(new RouletteSlot()
-            //{
-            //    Weight = 3.0f,
-            //    Color = FromColor(Color.FromArgb(32, 19, 174)),
-            //    Label = "Debug",
-            //    RenderedLabel = new QFontDrawing(),
-            //    Type = RouletteSlotType.BigShot
-            //});
+            returnVal.Clear();
+            returnVal.Add(new RouletteSlot()
+            {
+                Weight = 3.0f,
+                Color = FromColor(Color.FromArgb(32, 19, 174)),
+                Label = "Debug",
+                RenderedLabel = new QFontDrawing(),
+                Type = RouletteSlotType.Quizzler
+            });
 
             // While the list has adjacent elements, bubble shuffle the list
             if (returnVal.Count > 2)
@@ -848,10 +851,6 @@ namespace NativeGL.Screens
 
         public override void ScreenAboveFinished(GameScreen aboveScreen)
         {
-            if (aboveScreen is BigShotScreen)
-            {
-                Resources.AudioSubsystem.StopMusic();
-            }
         }
 
         private void PlayerButtonClicked(object source, ButtonPressedEventArgs args)
