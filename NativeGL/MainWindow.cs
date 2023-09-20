@@ -108,6 +108,8 @@ namespace NativeGL
             returnVal.SoundEffects["loss"] = CreateSampleFromOpusFileStream(new FileStream(@".\Resources\Sounds\Loss fanfare.opus", FileMode.Open));
             returnVal.SoundEffects["victory"] = CreateSampleFromOpusFileStream(new FileStream(@".\Resources\Sounds\Victory fanfare.opus", FileMode.Open));
             returnVal.SoundEffects["starting"] = CreateSampleFromOpusFileStream(new FileStream(@".\Resources\Sounds\Starting fanfare.opus", FileMode.Open));
+            returnVal.SoundEffects["question_correct"] = CreateSampleFromOpusFileStream(new FileStream(@".\Resources\Sounds\Bell.opus", FileMode.Open));
+            returnVal.SoundEffects["question_incorrect"] = CreateSampleFromOpusFileStream(new FileStream(@".\Resources\Sounds\Fail trumpet.opus", FileMode.Open));
 
             // Fonts
             QFontBuilderConfiguration fontBuilderConfig = new QFontBuilderConfiguration(true)

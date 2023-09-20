@@ -638,34 +638,13 @@ namespace NativeGL.Screens
             {
                 returnVal.Add(new RouletteSlot()
                 {
-                    Weight = 5.0f,
+                    Weight = 4.0f,
                     Color = FromColor(Color.FromArgb(239, 194, 0)),
                     Label = "Betrayal",
                     RenderedLabel = new QFontDrawing(),
                     Type = RouletteSlotType.PrisonerDilemma
                 });
             }
-            //for (int c = 0; c < 1; c++)
-            //{
-            //    returnVal.Add(new RouletteSlot()
-            //    {
-            //        Weight = 3.0f,
-            //        Color = FromColor(Color.FromArgb(217, 21, 39)),
-            //        Label = "Shoutout",
-            //        RenderedLabel = new QFontDrawing(),
-            //        Type = RouletteSlotType.Shoutout
-            //    });
-            //}
-            //for (int c = 0; c < 2; c++)
-            //{
-            //    returnVal.Add(new RouletteSlot()
-            //    {
-            //        Weight = 2.0f,
-            //        Color = FromColor(Color.FromArgb(113, 226, 255)),
-            //        Label = "Story Time",
-            //        RenderedLabel = new QFontDrawing(),
-            //        Type = RouletteSlotType.Storytime
-            //    });
             //}
             for (int c = 0; c < 1; c++)
             {
@@ -701,15 +680,15 @@ namespace NativeGL.Screens
                 });
             }
 
-            returnVal.Clear();
-            returnVal.Add(new RouletteSlot()
-            {
-                Weight = 3.0f,
-                Color = FromColor(Color.FromArgb(32, 19, 174)),
-                Label = "Debug",
-                RenderedLabel = new QFontDrawing(),
-                Type = RouletteSlotType.Quizzler
-            });
+            //returnVal.Clear();
+            //returnVal.Add(new RouletteSlot()
+            //{
+            //    Weight = 3.0f,
+            //    Color = FromColor(Color.FromArgb(32, 19, 174)),
+            //    Label = "Debug",
+            //    RenderedLabel = new QFontDrawing(),
+            //    Type = RouletteSlotType.Quizzler
+            //});
 
             // While the list has adjacent elements, bubble shuffle the list
             if (returnVal.Count > 2)

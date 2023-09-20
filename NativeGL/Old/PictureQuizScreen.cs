@@ -22,7 +22,7 @@
 
 //        private bool _configured = false;
 //        private PictureQuizQuestion _currentQuestion;
-        
+
 //        private QFont _questionFont;
 //        private QFontDrawing _drawing;
 //        private QFontRenderOptions _renderOptions;

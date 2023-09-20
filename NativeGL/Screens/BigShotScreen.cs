@@ -135,7 +135,7 @@ namespace NativeGL.Screens
                 }
                 else if (val < 0.8)
                 {
-                    sb.Append("Go Large or Go Away!");
+                    sb.Append("Go Large or    Go Away!");
                     _nextTextUpdate = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(2);
                 }
                 else if (val < 0.9)
