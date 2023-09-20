@@ -35,6 +35,19 @@ namespace NativeGL.Screens
                 UseDefaultBlendFunction = true,
                 CharacterSpacing = 0.15f
             };
+
+            _drawing.ProjectionMatrix = Matrix4.CreateOrthographicOffCenter(0.0f, InternalResolutionX, 0.0f, InternalResolutionY, -1.0f, 1.0f);
+            _drawing.DrawingPrimitives.Clear();
+
+            float sidePadding = 50;
+            SizeF maxWidth = new SizeF(InternalResolutionX - (sidePadding * 2), -1f);
+            _drawing.Print(
+                _headerFont, "Betrayal", new Vector3(InternalResolutionX / 2, InternalResolutionY - sidePadding, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
+            _drawing.Print(
+                _questionFont,
+                "Each team must secretly\r\nchoose Trust or Betray\r\n\r\nIf both TRUST, nothing happens\r\nIf only one BETRAYS,\r\nthey win 400 points\r\nIf both BETRAY, all scores go to zero",
+                new Vector3(InternalResolutionX / 2, InternalResolutionY - 250, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
+            _drawing.RefreshBuffers();
         }
 
         public override void KeyDown(KeyboardKeyEventArgs args)
