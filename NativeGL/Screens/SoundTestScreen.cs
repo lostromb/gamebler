@@ -16,9 +16,11 @@ namespace NativeGL.Screens
 {
     public class SoundTestScreen : GameScreen
     {
-        private QFont _questionFont;
+        private QFont _headerFont;
+        private QFont _answerFont;
         private QFontDrawing _drawing;
         private QFontRenderOptions _renderOptions;
+        private QFontRenderOptions _shadowRenderOptions;
 
         private Matrix4 projectionMatrix;
         private bool _finished = false;
@@ -44,20 +46,23 @@ namespace NativeGL.Screens
                 _finished = true;
             }
 
-            _questionFont = Resources.Fonts["default_80pt"];
+            _headerFont = Resources.Fonts["questionheader"];
+            _answerFont = Resources.Fonts["default_40pt"];
             _drawing = new QFontDrawing();
             _renderOptions = new QFontRenderOptions()
             {
                 UseDefaultBlendFunction = true,
                 CharacterSpacing = 0.15f
             };
-            _drawing.ProjectionMatrix = Matrix4.CreateOrthographicOffCenter(0.0f, InternalResolutionX, 0.0f, InternalResolutionY, -1.0f, 1.0f);
-            _drawing.DrawingPrimitives.Clear();
 
-            float sidePadding = 50;
-            SizeF maxWidth = new SizeF(InternalResolutionX - (sidePadding * 2), -1f);
-            _drawing.Print(_questionFont, "Identify this song", new Vector3(InternalResolutionX / 2, InternalResolutionY - sidePadding, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
-            _drawing.RefreshBuffers();
+            _shadowRenderOptions = new QFontRenderOptions()
+            {
+                UseDefaultBlendFunction = true,
+                CharacterSpacing = 0.15f,
+                DropShadowColour = Color.Black,
+                DropShadowActive = true,
+                DropShadowOpacity = 1.0f,
+            };
         }
 
         public override void KeyDown(KeyboardKeyEventArgs args)
@@ -122,6 +127,20 @@ namespace NativeGL.Screens
 
             GL.ActiveTexture(TextureUnit.Texture0);
 
+            // Draw hint text with drop shadow
+            _drawing.ProjectionMatrix = Matrix4.CreateOrthographicOffCenter(0.0f, InternalResolutionX, 0.0f, InternalResolutionY, -1.0f, 1.0f);
+            _drawing.DrawingPrimitives.Clear();
+
+            float sidePadding = 50;
+            SizeF maxWidth = new SizeF(InternalResolutionX - (sidePadding * 2), -1f);
+            _drawing.Print(_headerFont, "Identify this song", new Vector3(InternalResolutionX / 2, InternalResolutionY - sidePadding, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
+            
+            if (_showAnswer)
+            {
+                _drawing.Print(_answerFont, _currentPrompt.Answer, new Vector3(InternalResolutionX / 2.0f, 150, 0), maxWidth, QFontAlignment.Centre, _shadowRenderOptions);
+            }
+
+            _drawing.RefreshBuffers();
             _drawing.Draw();
         }
 

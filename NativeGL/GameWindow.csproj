@@ -112,6 +112,7 @@
     <Compile Include="Difficulty.cs" />
     <Compile Include="Old\ArticleOfFaithScreen.cs" />
     <Compile Include="Screens\ArenaScreen.cs" />
+    <Compile Include="Screens\AvatarSelectScreen.cs" />
     <Compile Include="Screens\BetrayalScreen.cs" />
     <Compile Include="Screens\DifficultySelectScreen.cs" />
     <Compile Include="Screens\FeelinGroovyScreen.cs" />

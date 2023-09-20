@@ -52,7 +52,7 @@ namespace NativeGL.Screens
             QFontBuilderConfiguration builderConfig = new QFontBuilderConfiguration(true)
             {
                 TextGenerationRenderHint = TextGenerationRenderHint.AntiAlias | TextGenerationRenderHint.AntiAliasGridFit,
-                Characters = CharacterSet.BasicSet,
+                Characters = CharacterSet.BasicSet | CharacterSet.ExtendedLatin,
                 ShadowConfig = new QFontShadowConfiguration()
                 {
                     Type = ShadowType.Expanded,

@@ -132,7 +132,7 @@ namespace NativeGL
             QFontBuilderConfiguration monospaceFontBuilderConfig = new QFontBuilderConfiguration(true)
             {
                 TextGenerationRenderHint = TextGenerationRenderHint.AntiAlias | TextGenerationRenderHint.AntiAliasGridFit,
-                Characters = CharacterSet.BasicSet,
+                Characters = CharacterSet.BasicSet | CharacterSet.ExtendedLatin,
                 ShadowConfig = new QFontShadowConfiguration()
                 {
                     Type = ShadowType.Expanded,

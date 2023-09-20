@@ -22,6 +22,7 @@ namespace NativeGL.Screens
         private QFontRenderOptions _renderOptions;
 
         private StringBuilder _currentString = new StringBuilder();
+        private string _chosenAvatar;
         private bool _entryFinished = false;
         private string _prompt;
 
@@ -35,7 +36,7 @@ namespace NativeGL.Screens
             QFontBuilderConfiguration builderConfig = new QFontBuilderConfiguration(true)
             {
                 TextGenerationRenderHint = TextGenerationRenderHint.AntiAlias | TextGenerationRenderHint.AntiAliasGridFit,
-                Characters = CharacterSet.BasicSet
+                Characters = CharacterSet.BasicSet | CharacterSet.ExtendedLatin
             };
 
             _entryFont = Resources.Fonts["default_80pt"];
@@ -60,7 +61,7 @@ namespace NativeGL.Screens
             }
             if (args.Key == OpenTK.Input.Key.Enter)
             {
-                _entryFinished = true;
+                EnqueueScreen(new AvatarSelectScreen());
             }
         }
         
@@ -89,6 +90,15 @@ namespace NativeGL.Screens
             
         }
 
+        public override void ScreenAboveFinished(GameScreen aboveScreen)
+        {
+            if (aboveScreen is AvatarSelectScreen)
+            {
+                _chosenAvatar = ((AvatarSelectScreen)aboveScreen).ReturnVal;
+                _entryFinished = true;
+            }
+        }
+
         public override bool Finished
         {
             get
@@ -97,16 +107,11 @@ namespace NativeGL.Screens
             }
         }
 
-        public void ClickedEnter(object source, EventArgs args)
-        {
-            _entryFinished = true;
-        }
-
-        public string ReturnVal
+        public Tuple<string, string> ReturnVal
         {
             get
             {
-                return _currentString.ToString();
+                return new Tuple<string, string>(_currentString.ToString(), _chosenAvatar);
             }
         }
     }

@@ -94,12 +94,11 @@ namespace NativeGL.Screens
             if (aboveScreen is NameEntryScreen)
             {
                 // Add player to the roster
-                Random rand = new Random();
-                List<string> keys = new List<string>(Resources.Avatars.AvailableAvatars.Keys);
-                string avKey = keys[rand.Next(0, keys.Count)];
+                Tuple<string, string> playerNameAndAvatar = ((NameEntryScreen)aboveScreen).ReturnVal;
+                string avKey = playerNameAndAvatar.Item2;
                 GameState.Players.Add(new Player()
                 {
-                    Name = ((NameEntryScreen)aboveScreen).ReturnVal,
+                    Name = playerNameAndAvatar.Item1,
                     Score = 0,
                     Avatar = Resources.Avatars.AvailableAvatars[avKey]
                 });
@@ -118,6 +117,7 @@ namespace NativeGL.Screens
 
                     // Shuffle the player list
                     List<Player> shuffledList = new List<Player>();
+                    Random rand = new Random();
                     while (GameState.Players.Count > 0)
                     {
                         Player next = GameState.Players[rand.Next(0, GameState.Players.Count)];
