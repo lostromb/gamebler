@@ -25,6 +25,8 @@ namespace NativeGL.Screens
             public float Height;
         }
 
+        private static readonly TimeSpan QUESTION_TIME = TimeSpan.FromSeconds(21);
+        private DateTimeOffset _screenStartTime;
         private bool _showingAnswers = false;
         private bool _finished = false;
         private QFont _headerFont;
@@ -111,6 +113,8 @@ namespace NativeGL.Screens
                 _buttons.Add(button);
                 rawButton.Clicked += ButtonClicked;
             }
+
+            _screenStartTime = DateTimeOffset.UtcNow;
         }
 
         public override void KeyDown(KeyboardKeyEventArgs args)
@@ -184,6 +188,11 @@ namespace NativeGL.Screens
             _drawing.Print(_headerFont, "QUIZZLER", new Vector3(InternalResolutionX / 2, InternalResolutionY - sidePadding, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
             _drawing.Print(_questionFont, _question.QuestionText,
                 new Vector3((InternalResolutionX + sidePadding) / 2, 800, 0), maxWidth, QFontAlignment.Left, _renderOptions);
+
+            TimeSpan currentTime = QUESTION_TIME - (DateTimeOffset.UtcNow - _screenStartTime);
+            int secondsRemaining = Math.Max(0, (int)Math.Ceiling(currentTime.TotalSeconds));
+            _drawing.Print(_questionFont, "TIME: " + secondsRemaining,
+                new Vector3(InternalResolutionX / 2, 100, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
 
             _drawing.RefreshBuffers();
             _drawing.Draw();

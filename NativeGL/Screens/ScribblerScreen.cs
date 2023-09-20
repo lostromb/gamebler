@@ -62,7 +62,7 @@ namespace NativeGL.Screens
             float sidePadding = 50;
             SizeF maxWidth = new SizeF(InternalResolutionX - (sidePadding * 2), -1f);
             _drawing.Print(_headerFont, "DRAWBAGE", new Vector3(InternalResolutionX / 2, InternalResolutionY - sidePadding, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
-            _drawing.Print(_questionFont, "One person will draw the given prompt on the board.\r\n\r\n150 points are awarded if their team can guess correctly what you are drawing within the time limit.\r\n\r\nM.C. will provide the prompt.\r\n\r\nOther team will be allowed 1 guess to steal points if you fail.", new Vector3(sidePadding, InternalResolutionY - 250, 0), maxWidth, QFontAlignment.Justify, _renderOptions);
+            _drawing.Print(_questionFont, "One person from your team will draw the given prompt on the board.\r\n\r\n200 points are awarded if the rest of the team can guess correctly what they are drawing within the time limit.\r\n\r\nGM will provide the prompt.\r\n\r\nOther team will be allowed 1 guess to steal points if you fail.", new Vector3(sidePadding, InternalResolutionY - 250, 0), maxWidth, QFontAlignment.Justify, _renderOptions);
             _drawing.RefreshBuffers();
 
             _drawing.Draw();

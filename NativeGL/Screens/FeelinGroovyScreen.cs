@@ -67,7 +67,7 @@ namespace NativeGL.Screens
             float sidePadding = 50;
             SizeF maxWidth = new SizeF(InternalResolutionX - (sidePadding * 2), -1f);
             _drawing.Print(_headerFont, "Feelin' Groovy", new Vector3(InternalResolutionX / 2, InternalResolutionY - sidePadding, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
-            _drawing.Print(_questionFont, "Current player gains 150 points", new Vector3(sidePadding, InternalResolutionY - 250, 0), maxWidth, QFontAlignment.Justify, _renderOptions);
+            _drawing.Print(_questionFont, "Current player gains 200 points", new Vector3(sidePadding, InternalResolutionY - 250, 0), maxWidth, QFontAlignment.Justify, _renderOptions);
             _drawing.RefreshBuffers();
 
             _drawing.Draw();

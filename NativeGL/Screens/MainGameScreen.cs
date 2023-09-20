@@ -159,7 +159,7 @@ namespace NativeGL.Screens
                         outcomeOk = true;
 
                         // Disallow the same category multiple times in a row
-                            if (_categoryHistory.Contains(predictedOutcome))
+                        if (_categoryHistory.Contains(predictedOutcome))
                         {
                             outcomeOk = false;
                         }
@@ -172,8 +172,10 @@ namespace NativeGL.Screens
                         }
 
                         // Disallow feelin' sad for the player with fewest points
+                        // or if it would put them into negative
                         if (predictedOutcome == RouletteSlotType.FeelinSad &&
-                            currentPlayerPoints == lowestPlayerPoints)
+                            (currentPlayerPoints == lowestPlayerPoints ||
+                            currentPlayerPoints < 100))
                         {
                             outcomeOk = false;
                         }

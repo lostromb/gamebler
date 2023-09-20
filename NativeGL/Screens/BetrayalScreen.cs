@@ -21,7 +21,6 @@ namespace NativeGL.Screens
         private QFontDrawing _drawing;
         private QFontRenderOptions _renderOptions;
 
-        private bool _configured = false;
         private bool _finished = false;
 
         protected override void InitializeInternal()
@@ -30,7 +29,6 @@ namespace NativeGL.Screens
             _questionFont = Resources.Fonts["default_60pt"];
 
             _drawing = new QFontDrawing();
-            _configured = true;
 
             _renderOptions = new QFontRenderOptions()
             {
@@ -56,33 +54,11 @@ namespace NativeGL.Screens
             GL.ClearColor(0.0f, 0.0f, 0.0f, 0.0f);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            if (!_configured)
-            {
-                return;
-            }
-
-            _drawing.ProjectionMatrix = Matrix4.CreateOrthographicOffCenter(0.0f, InternalResolutionX, 0.0f, InternalResolutionY, -1.0f, 1.0f);
-            _drawing.DrawingPrimitives.Clear();
-
-            float sidePadding = 50;
-            SizeF maxWidth = new SizeF(InternalResolutionX - (sidePadding * 2), -1f);
-            _drawing.Print(
-                _headerFont, "Betrayal", new Vector3(InternalResolutionX / 2, InternalResolutionY - sidePadding, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
-            _drawing.Print(
-                _questionFont,
-                "Each team must secretly\r\nchoose Trust or Betray\r\n\r\nIf both TRUST, nothing happens\r\nIf only one BETRAYS,\r\nthey win 250 points\r\nIf both BETRAY, all scores go to zero",
-                new Vector3(InternalResolutionX / 2, InternalResolutionY - 250, 0), maxWidth, QFontAlignment.Centre, _renderOptions);
-            _drawing.RefreshBuffers();
-
             _drawing.Draw();
         }
 
         public override void Logic(double msElapsed)
         {
-            if (!_configured)
-            {
-                return;
-            }
         }
 
         public override bool Finished
