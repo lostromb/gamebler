@@ -512,6 +512,27 @@ namespace NativeGL.Screens
             {
                 _wheelVelocity = 0;
                 _wheelLocked = true;
+
+                // Lock in selection
+                float wheelSum = 0;
+                foreach (BigShotRouletteSlot slot in _rouletteSlots)
+                {
+                    wheelSum += slot.Weight;
+                }
+
+                float theta = 0;
+                float normalizer = TWO_PI / wheelSum;
+                foreach (BigShotRouletteSlot slot in _rouletteSlots)
+                {
+                    theta += slot.Weight * normalizer;
+
+                    if ((TWO_PI - theta) < _wheelRotation)
+                    {
+                        _selectedSlot = slot;
+                        break;
+                    }
+                }
+
                 WheelSettled(_selectedSlot);
             }
             else

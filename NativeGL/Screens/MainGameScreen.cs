@@ -266,7 +266,7 @@ namespace NativeGL.Screens
                         _rouletteSlots.Add(new RouletteSlot()
                         {
                             Weight = 2.0f,
-                            Color = FromColor(Color.FromArgb(247, 204, 10)),
+                            Color = FromColor(Color.FromArgb(250, 85, 203)),
                             Label = "BIG SHOT",
                             RenderedLabel = new QFontDrawing(),
                             Type = RouletteSlotType.BigShot
@@ -757,6 +757,26 @@ namespace NativeGL.Screens
                 if (!_timesAlmostUp)
                 {
                     Resources.AudioSubsystem.StopMusic();
+                }
+
+                // Lock in selection
+                float wheelSum = 0;
+                foreach (RouletteSlot slot in _rouletteSlots)
+                {
+                    wheelSum += slot.Weight;
+                }
+
+                float theta = 0;
+                float normalizer = TWO_PI / wheelSum;
+                foreach (RouletteSlot slot in _rouletteSlots)
+                {
+                    theta += slot.Weight * normalizer;
+
+                    if ((TWO_PI - theta) < _wheelRotation)
+                    {
+                        _selectedSlot = slot;
+                        break;
+                    }
                 }
 
                 WheelSettled(_selectedSlot);
