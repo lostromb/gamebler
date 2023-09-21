@@ -189,7 +189,7 @@ namespace NativeGL.Screens
 
                         // Disallow A.I. arena and prisoners dilemma when players have low score totals
                         if ((predictedOutcome == RouletteSlotType.AIArena || predictedOutcome == RouletteSlotType.PrisonerDilemma) &&
-                            lowestPlayerPoints < 150)
+                            lowestPlayerPoints < 200)
                         {
                             outcomeOk = false;
                         }

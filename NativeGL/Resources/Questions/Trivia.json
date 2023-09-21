@@ -35,4 +35,5 @@
 { "Category": "Geography", "QuestionText": "Which river forms part of the border between the U.S.A. and Mexico?", "Answer": "The Rio Grande", "Incorrect": [ "The Mississippi", "The San Joaquin", "The Colorado" ] },
 { "Category": "Science", "QuestionText": "About how long does it take for the light from the Sun to reach Earth?", "Answer": "8 minutes", "Incorrect": [ "18 seconds", "3 minutes", "20 minutes" ] },
 { "Category": "Math", "QuestionText": "What is the smallest common denominator of 1/4 and 3/16?", "Answer": "16", "Incorrect": [ "4", "32", "12" ] },
+{ "Category": "Rocket League", "QuestionText": "In competitive Rocket League, what is the name of the ranking tier above Champion?", "Answer": "Grand Champion", "Incorrect": [ "Diamond", "Global Elite", "Master" ] },
 ]
